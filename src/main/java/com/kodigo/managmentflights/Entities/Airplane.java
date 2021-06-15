@@ -8,4 +8,11 @@ public class Airplane extends Entity {
     private short  capacity;
     private String model;
     private short flyCapacity;
+    private String airline;
+
+    public Airplane() {
+    }
+
+    public Airplane(String airline, String model) {
+    }
 }

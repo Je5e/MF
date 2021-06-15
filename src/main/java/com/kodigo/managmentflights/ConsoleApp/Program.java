@@ -1,21 +1,23 @@
 package com.kodigo.managmentflights.ConsoleApp;
 
-import com.kodigo.managmentflights.DAL.AirplaneInMemoryRepository;
-import com.kodigo.managmentflights.DAL.IRepository;
-import com.kodigo.managmentflights.Entities.Airplane;
+import com.kodigo.managmentflights.DAL.FlightInMemoryRepository;
+import com.kodigo.managmentflights.DAL.InMemoryRepository;
+import com.kodigo.managmentflights.Entities.Flight;
 import com.kodigo.managmentflights.Menu.MainMenuOptionList;
 import com.kodigo.managmentflights.Menu.Options;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Program {
+    public static FlightInMemoryRepository flightRepository;
     static boolean salir = false;
+
     public static void main(String[] args){
         iniciar();
+        System.out.println(flightRepository);
     }
-    static void iniciar() {
+    public static void iniciar() {
         while (!Program.salir) {
             int opcionSeleccionada = mostrarMenu();
             try {
