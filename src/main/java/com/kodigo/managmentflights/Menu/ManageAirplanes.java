@@ -1,6 +1,6 @@
 package com.kodigo.managmentflights.Menu;
 
-import com.kodigo.managmentflights.DAL.AirplaneInMemoryRepository;
+import com.kodigo.managmentflights.DAL.AirplaneInMemoryRepositoryImp;
 import com.kodigo.managmentflights.Entities.Airplane;
 
 import java.util.Scanner;
@@ -14,7 +14,7 @@ public class ManageAirplanes extends  Options{
     }
     public void executeAction() {
         System.out.println("This is the action of the Manage Airplane Menu");
-        AirplaneInMemoryRepository repository = new AirplaneInMemoryRepository();
+        AirplaneInMemoryRepositoryImp repository = new AirplaneInMemoryRepositoryImp();
 
         Set<Airplane> airplaneList = repository.findAll();
         System.out.println("Id\tAirplane");

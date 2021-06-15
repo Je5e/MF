@@ -14,5 +14,16 @@ public class Airplane extends Entity {
     }
 
     public Airplane(String airline, String model) {
+        this.airline=airline;
+        this.model=model;
+    }
+    public String toString() {
+        StringBuilder string =new StringBuilder();
+        string.append(" Model: ")
+                .append(this.model)
+                .append(" Airline: ")
+                .append(airline).append(" Fly Capacity: ").append(this.flyCapacity).append(" Capacity: ").append(capacity);
+
+        return string.toString();
     }
 }

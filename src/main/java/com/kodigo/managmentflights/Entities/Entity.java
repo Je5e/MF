@@ -28,8 +28,8 @@ public abstract class Entity {
         return Objects.hash(id);
     }
 
-    @Override
-    public String toString() {
-        return id.substring(0,8);
-    }
+  //  @Override
+    //public String toString() {
+       // return id.substring(0,8);
+   // }
 }

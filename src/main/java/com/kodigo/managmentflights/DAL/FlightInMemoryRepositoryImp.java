@@ -96,8 +96,10 @@ public class FlightInMemoryRepositoryImp extends InMemoryRepositoryImp<Flight>
 
     @Override
     public void AddFlightsArrayList(List<Flight> flights) {
-        for (Flight f:flights){
+        for (Flight f : flights) {
             entities.add(f);
         }
+
     }
+
 }

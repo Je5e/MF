@@ -1,9 +1,6 @@
 package com.kodigo.managmentflights.Entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,4 +19,26 @@ public class Flight extends Entity {
     public Flight() {
         schedules = new ArrayList<>();
     }
+
+    public String toString() {
+     StringBuilder string =new StringBuilder();
+     string.append("-----------------------------------------------------------\n")
+             .append(" idFlight: ")
+             .append(this.getId())
+             .append("\n Flight number: ")
+             .append(flightNumber)
+             .append("\n Airplane: ")
+             .append(airplane)
+             .append("\n departure from: ")
+             .append(departure)
+             .append("\n arrival: ")
+             .append(arrival)
+             .append("\n Schedules: ")
+             .append(schedules)
+             .append("\n-----------------------------------------------------------\n");
+
+     return string.toString();
+    }
+
+
 }

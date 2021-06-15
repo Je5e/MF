@@ -1,8 +1,5 @@
 package com.kodigo.managmentflights.ConsoleApp;
 
-import com.kodigo.managmentflights.DAL.FlightInMemoryRepository;
-import com.kodigo.managmentflights.DAL.InMemoryRepository;
-import com.kodigo.managmentflights.Entities.Flight;
 import com.kodigo.managmentflights.Menu.MainMenuOptionList;
 import com.kodigo.managmentflights.Menu.Options;
 
@@ -10,12 +7,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Program {
-    public static FlightInMemoryRepository flightRepository;
     static boolean salir = false;
 
     public static void main(String[] args){
         iniciar();
-        System.out.println(flightRepository);
     }
     public static void iniciar() {
         while (!Program.salir) {

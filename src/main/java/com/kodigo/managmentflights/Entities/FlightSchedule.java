@@ -18,4 +18,14 @@ public class FlightSchedule {
         this.dateDaparture=departure;
         this.dateArrival=arrival;
     }
+    public String toString() {
+        StringBuilder string =new StringBuilder();
+        string.append(" Departure Date: ")
+                .append(this.dateDaparture)
+                .append(" Arrival Date: ")
+                .append(dateArrival)
+                .append("\n");
+
+        return string.toString();
+    }
 }
