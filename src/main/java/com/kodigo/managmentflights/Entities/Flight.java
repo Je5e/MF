@@ -14,6 +14,7 @@ import java.util.List;
 public class Flight extends Entity {
     private String flightNumber;
     private Airplane airplane;
+    private int airplaneId;
     private Location departure;
     private Location arrival;
     private List<FlightSchedule> schedules;

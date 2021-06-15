@@ -1,13 +1,12 @@
 package com.kodigo.managmentflights.DAL;
 
+import com.kodigo.managmentflights.DAL.Interfaces.IAirplaneInMemoryRepository;
 import com.kodigo.managmentflights.Entities.Airplane;
-import jdk.jfr.Timespan;
 
-import java.util.List;
+public class AirplaneInMemoryRepositoryImp extends InMemoryRepositoryImp<Airplane>
+        implements IAirplaneInMemoryRepository<Airplane> {
 
-public class AirplaneInMemoryRepository extends InMemoryRepository<Airplane>{
-
-    public AirplaneInMemoryRepository(){
+    public AirplaneInMemoryRepositoryImp() {
         Airplane A1 = new Airplane();
         A1.setAirplane("Airplane1");
         A1.setCapacity((short) 45);
@@ -29,17 +28,17 @@ public class AirplaneInMemoryRepository extends InMemoryRepository<Airplane>{
         A3.setFlyCapacity((short) 10);
         entities.add(A3);
     }
+
     // Todos los metodos adicionales.
- public Airplane findAirplaneById(String id){
-        Airplane result=null;
-        for (Airplane a:entities){
+    public Airplane findAirplaneById(String id) {
+        Airplane result = null;
+        for (Airplane a : entities) {
             String identifier = a.getId();
-            if (identifier.equalsIgnoreCase(id)){
+            if (identifier.equalsIgnoreCase(id)) {
                 result = a;
                 break;
             }
         }
-
         return result;
- }
+    }
 }

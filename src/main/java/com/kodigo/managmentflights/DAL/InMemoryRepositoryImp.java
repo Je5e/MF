@@ -1,12 +1,14 @@
 package com.kodigo.managmentflights.DAL;
 
+import com.kodigo.managmentflights.DAL.Interfaces.Base.IRepository;
 import com.kodigo.managmentflights.Entities.Entity;
 
-import java.lang.reflect.Type;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
-public abstract class InMemoryRepository<T extends Entity> implements  IRepository<T>{
+// Tendria que tener otra clase que implemente IRepository si quisiera otro origen de datos.
+public abstract class InMemoryRepositoryImp<T extends Entity>
+        implements IRepository<T> {
+
    protected Set<T> entities = new HashSet<>();
 
     @Override

@@ -1,4 +1,4 @@
-package com.kodigo.managmentflights.DAL;
+package com.kodigo.managmentflights.DAL.Interfaces.Base;
 
 import com.kodigo.managmentflights.Entities.Entity;
 
