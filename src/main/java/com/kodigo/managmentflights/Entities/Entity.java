@@ -7,7 +7,8 @@ public abstract class Entity {
     private final String id;
 
     public Entity() {
-        this.id = UUID.randomUUID().toString();
+        // Datos en memoria.
+        this.id = UUID.randomUUID().toString().substring(0,8);
     }
 
     public String getId() {
@@ -29,6 +30,6 @@ public abstract class Entity {
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName() + "[id=" + id.substring(0,8) + "...]";
+        return id.substring(0,8);
     }
 }

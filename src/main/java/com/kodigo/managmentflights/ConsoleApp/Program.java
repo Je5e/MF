@@ -12,6 +12,7 @@ public class Program {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         AirplaneInMemoryRepository repository = new AirplaneInMemoryRepository();
+
         Set<Airplane> airplaneList = repository.findAll();
         System.out.println("Id\tAirplane");
         for(Airplane airplane:airplaneList){
@@ -31,7 +32,7 @@ public class Program {
          airplaneList = repository.findAll();
         System.out.println("Id\tAirplane");
         for(Airplane ai:airplaneList){
-            System.out.println(ai.getId()+"\t"+ai.getAirplane());
+            System.out.println(ai.toString()+"\t"+ai.getAirplane());
         }
 
         System.out.print("UPDATE");
