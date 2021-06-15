@@ -14,4 +14,8 @@ public class FlightSchedule {
     private Date RealArrival;
     Status status;
     private String Comment;
+    public FlightSchedule(Date departure, Date arrival){
+        this.dateDaparture=departure;
+        this.dateArrival=arrival;
+    }
 }
