@@ -1,11 +1,13 @@
 package com.kodigo.managmentflights.Menu;
 
 import com.kodigo.managmentflights.DAL.FlightInMemoryRepositoryImp;
-import com.kodigo.managmentflights.DAL.FlightScheduleInMemoryRepositoryImp;
+import com.kodigo.managmentflights.DAL.Interfaces.IFlightInMemoryRepository;
 import com.kodigo.managmentflights.Entities.*;
 import com.kodigo.managmentflights.helpers.EmailImp;
-import com.kodigo.managmentflights.helpers.IExporterDocument;
-import com.kodigo.managmentflights.helpers.ImporterDocumentImp;
+import com.kodigo.managmentflights.helpers.IDocumentGenerator;
+import com.kodigo.managmentflights.helpers.DocumentGeneratorImp;
+import com.kodigo.managmentflights.services.APIWeatherImp;
+import com.kodigo.managmentflights.services.WeatherForecast;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -19,7 +21,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ManageFlights extends Options  {
-    FlightInMemoryRepositoryImp flightsrepository = new FlightInMemoryRepositoryImp();
+   static IFlightInMemoryRepository<Flight> flightsrepository =
+           new FlightInMemoryRepositoryImp();
+    WeatherForecast apiWeather=new WeatherForecast(new APIWeatherImp());
     // IFlightRepository repository;
 
     public ManageFlights(Integer code) {
@@ -58,7 +62,7 @@ public class ManageFlights extends Options  {
 
     private void generateFlightsReport() {
         EmailImp email=new EmailImp();
-        IExporterDocument exporterDocument = new ImporterDocumentImp();
+        IDocumentGenerator exporterDocument = new DocumentGeneratorImp();
         ArrayList<Flight> ongoings= new ArrayList<>();
         ArrayList<Flight> delays= new ArrayList<>();
         ArrayList<Flight> cancels= new ArrayList<>();
@@ -104,11 +108,11 @@ public class ManageFlights extends Options  {
         }
         switch (option) {
             case "0" ->System.out.println("Wrong Option");
-            case "1" -> exporterDocument.writeToExcelFile(ongoings,"ongoings.xls");
-            case "2"->  exporterDocument.writeToExcelFile(delays,"delays.xls");
-            case "3" -> exporterDocument.writeToExcelFile(cancels,"cancels.xls");
-            case "4" -> exporterDocument.writeToExcelFile(landeds,"landed.xls");
-            case "5" -> exporterDocument.writeToExcelFile(all,"general.xls");
+            case "1" -> exporterDocument.writeToExcelFile(ongoings,"ongoings.xls",apiWeather.getTempetureF());
+            case "2"->  exporterDocument.writeToExcelFile(delays,"delays.xls",apiWeather.getTempetureF());
+            case "3" -> exporterDocument.writeToExcelFile(cancels,"cancels.xls",apiWeather.getTempetureF());
+            case "4" -> exporterDocument.writeToExcelFile(landeds,"landed.xls",apiWeather.getTempetureF());
+            case "5" -> exporterDocument.writeToExcelFile(all,"general.xls",apiWeather.getTempetureF());
             case "6" -> System.out.println("Exit");
         }
         switch (option) {

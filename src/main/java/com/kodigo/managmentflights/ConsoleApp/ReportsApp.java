@@ -3,12 +3,10 @@ package com.kodigo.managmentflights.ConsoleApp;
 import com.kodigo.managmentflights.DAL.FlightInMemoryRepositoryImp;
 import com.kodigo.managmentflights.DAL.Interfaces.IFlightInMemoryRepository;
 import com.kodigo.managmentflights.Entities.Flight;
-import com.kodigo.managmentflights.helpers.IExporterDocument;
-import com.kodigo.managmentflights.helpers.ImporterDocumentImp;
+import com.kodigo.managmentflights.helpers.IDocumentGenerator;
+import com.kodigo.managmentflights.helpers.DocumentGeneratorImp;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class ReportsApp {
     public static void main(String[] args) {
@@ -29,9 +27,9 @@ public class ReportsApp {
         repo .AddFlightsArrayList(flights);
          // Get Flight By Id. Report.
         //var flight = repo.getFlightById(id);
-        IExporterDocument exporterDocument = new ImporterDocumentImp();
+        IDocumentGenerator exporterDocument = new DocumentGeneratorImp();
         //List<Flight> data = new ArrayList<>();
         //data.add(flight);
-        exporterDocument.writeToExcelFile(flights, "report.xls");
+        //exporterDocument.writeToExcelFile(flights, "report.xls");
     }
 }

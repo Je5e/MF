@@ -4,19 +4,15 @@ import com.kodigo.managmentflights.Entities.Flight;
 import com.kodigo.managmentflights.Entities.FlightSchedule;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
-import org.bouncycastle.cert.crmf.jcajce.JceCRMFEncryptorBuilder;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class ImporterDocumentImp implements IExporterDocument {
+public class DocumentGeneratorImp implements IDocumentGenerator {
     @Override
-    public boolean writeToExcelFile(List<Flight> flightList, String filePath) {
-        boolean result = false;
+    public boolean writeToExcelFile(List<Flight> flightList, String filePath, String weather) {
+        boolean result;
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet();
         createRowHeader(sheet);
@@ -25,7 +21,7 @@ public class ImporterDocumentImp implements IExporterDocument {
             Row row = sheet.createRow(++rowCount);
             writeFlight(f, row);
             for (FlightSchedule fs : f.getSchedules()) {
-                writeFlightsSchedule(fs, row);
+                writeFlightsSchedule(fs, row, weather);
             }
         }
         try(FileOutputStream fileOutputStream = new FileOutputStream(filePath)) {
@@ -33,6 +29,7 @@ public class ImporterDocumentImp implements IExporterDocument {
             result=true;
         } catch (IOException e) {
             e.printStackTrace();
+            result =false;
         }
         return result;
     }
@@ -67,9 +64,12 @@ public class ImporterDocumentImp implements IExporterDocument {
         Cell motivo = row.createCell(7);
         motivo.setCellStyle(cellStyle);
         motivo.setCellValue("Comment");
+        Cell weather = row.createCell(8);
+        weather.setCellStyle(cellStyle);
+        weather.setCellValue("Weather");
     }
 
-    private void writeFlightsSchedule(FlightSchedule fs, Row row) {
+    private void writeFlightsSchedule(FlightSchedule fs, Row row,String w) {
         Cell cell = row.createCell(4);
 
         cell.setCellValue(fs.getDateDaparture().toString());
@@ -81,8 +81,10 @@ public class ImporterDocumentImp implements IExporterDocument {
         cell.setCellValue(fs.getStatus().toString());
         cell = row.createCell(7);
         cell.setCellValue(fs.getComment());
-    }
 
+        cell = row.createCell(8);
+        cell.setCellValue(w);
+    }
 
     private void writeFlight(Flight f, Row row) {
         Cell cell = row.createCell(1);

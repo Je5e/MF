@@ -1,5 +1,11 @@
 package com.kodigo.managmentflights.ConsoleApp;
 
+import com.kodigo.managmentflights.DAL.AirplaneInMemoryRepositoryImp;
+import com.kodigo.managmentflights.DAL.FlightInMemoryRepositoryImp;
+import com.kodigo.managmentflights.DAL.Interfaces.IAirplaneInMemoryRepository;
+import com.kodigo.managmentflights.DAL.Interfaces.IFlightInMemoryRepository;
+import com.kodigo.managmentflights.Entities.Airplane;
+import com.kodigo.managmentflights.Entities.Flight;
 import com.kodigo.managmentflights.Menu.MainMenuOptionList;
 import com.kodigo.managmentflights.Menu.Options;
 
@@ -7,11 +13,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Program {
+    public static IAirplaneInMemoryRepository<Airplane> repositoryAirplane =
+            new AirplaneInMemoryRepositoryImp();
     static boolean salir = false;
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         iniciar();
     }
+
     public static void iniciar() {
         while (!Program.salir) {
             int opcionSeleccionada = mostrarMenu();
@@ -24,6 +33,7 @@ public class Program {
             iniciar();
         }
     }
+
     private static int mostrarMenu() {
         int result;
         System.out.println("Opciones:");
@@ -41,6 +51,7 @@ public class Program {
 
         return result;
     }
+
     public static void Salir() {
         salir = true;
     }

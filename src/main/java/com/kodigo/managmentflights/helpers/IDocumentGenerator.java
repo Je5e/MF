@@ -4,7 +4,7 @@ import com.kodigo.managmentflights.Entities.Flight;
 
 import java.util.List;
 
-public interface IExporterDocument {
+public interface IDocumentGenerator {
 
-    boolean writeToExcelFile(List<Flight> flightList, String filePath);
+    boolean writeToExcelFile(List<Flight> flightList, String filePath,String weather);
 }

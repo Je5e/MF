@@ -5,9 +5,9 @@ import lombok.*;
 @Getter@Setter
 public class Airplane extends Entity {
     private String airplane;
-    private short  capacity;
+    private int  capacity;
     private String model;
-    private short flyCapacity;
+    private int flyCapacity;
     private String airline;
 
     public Airplane() {
