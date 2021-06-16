@@ -3,6 +3,8 @@ package com.kodigo.managmentflights.Menu;
 import com.kodigo.managmentflights.DAL.FlightInMemoryRepositoryImp;
 import com.kodigo.managmentflights.DAL.FlightScheduleInMemoryRepositoryImp;
 import com.kodigo.managmentflights.Entities.*;
+import com.kodigo.managmentflights.helpers.IExporterDocument;
+import com.kodigo.managmentflights.helpers.ImporterDocumentImp;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -15,9 +17,8 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ManageFlights extends Options {
+public class ManageFlights extends Options  {
     FlightInMemoryRepositoryImp flightsrepository = new FlightInMemoryRepositoryImp();
-    FlightScheduleInMemoryRepositoryImp flightschedulerepository = new FlightScheduleInMemoryRepositoryImp();
     // IFlightRepository repository;
 
     public ManageFlights(Integer code) {
@@ -27,6 +28,7 @@ public class ManageFlights extends Options {
 
     public void executeAction() throws ParseException, IOException {
       //  System.out.println(flightsrepository.findAll());
+
         var flightlist = flightsrepository.findAll();
         for (Flight flight:flightlist){
             System.out.println(flight);
@@ -54,6 +56,59 @@ public class ManageFlights extends Options {
     }
 
     private void generateFlightsReport() {
+        IExporterDocument exporterDocument = new ImporterDocumentImp();
+        ArrayList<Flight> ongoings= new ArrayList<>();
+        ArrayList<Flight> delays= new ArrayList<>();
+        ArrayList<Flight> cancels= new ArrayList<>();
+        ArrayList<Flight> landeds= new ArrayList<>();
+        ArrayList<Flight> all= new ArrayList<>();
+
+        String submenuFlightsReports = """
+                This is the submenu of Generate Reports, please select one of the options below\s
+                1.On Going Reports
+                2.Delay Reports
+                3.Cancelled Reports
+                4.Landed Reports
+                5.General Reports
+                6.Exit""";
+        System.out.println(submenuFlightsReports);
+        Scanner f = new Scanner(System.in);
+        System.out.println("Enter one of the above options");
+        String option = f.nextLine();
+
+        var flightlist = flightsrepository.findAll();
+        Status onGoing=Status.OnGoing;
+        Status canceled=Status.canceled;
+        Status delay=Status.Delay;
+        Status landed=Status.Landed;
+
+        for (Flight flight:flightlist){
+            List<FlightSchedule> schedules = flight.getSchedules();
+            for (FlightSchedule schedule:schedules){
+                if (schedule.getStatus()==onGoing){
+                    ongoings.add(flight);
+                }
+                else if (schedule.getStatus()==delay){
+                    delays.add(flight);
+                }
+                else if (schedule.getStatus()==canceled){
+                    cancels.add(flight);
+                }
+                else if (schedule.getStatus()==landed){
+                    landeds.add(flight);
+            }
+            }
+            all.add(flight);
+        }
+        switch (option) {
+            case "0" ->System.out.println("Wrong Option");
+            case "1" -> exporterDocument.writeToExcelFile(ongoings,"ongoings.xls");
+            case "2"->  exporterDocument.writeToExcelFile(delays,"delays.xls");
+            case "3" -> exporterDocument.writeToExcelFile(cancels,"cancels.xls");
+            case "4" -> exporterDocument.writeToExcelFile(landeds,"landed.xls");
+            case "5" -> exporterDocument.writeToExcelFile(all,"general.xls");
+            case "6" -> System.out.println("Exit");
+        }
     }
 
     private void updateFlight() {
