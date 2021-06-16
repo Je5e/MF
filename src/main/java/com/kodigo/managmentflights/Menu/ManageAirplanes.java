@@ -3,16 +3,20 @@ package com.kodigo.managmentflights.Menu;
 import com.kodigo.managmentflights.DAL.AirplaneInMemoryRepositoryImp;
 import com.kodigo.managmentflights.Entities.Airplane;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
-public class ManageAirplanes extends  Options{
+public class ManageAirplanes extends  Options implements ISubMenu{
 
     public ManageAirplanes(Integer code) {
         this.code = code;
         this.description = "Manage Airplanes.";
+
     }
     public void executeAction() {
+
         System.out.println("This is the action of the Manage Airplane Menu");
         AirplaneInMemoryRepositoryImp repository = new AirplaneInMemoryRepositoryImp();
 
@@ -52,5 +56,17 @@ public class ManageAirplanes extends  Options{
         for(Airplane aii:airplaneList){
             System.out.println(aii.getId()+"\t"+aii.getAirplane());
         }
+    }
+
+    @Override
+    public List<Options> getSubOptions() {
+        subOptions.add(new SubMenuInsertAirplaneOptions(1 ));
+        subOptions.add(new SubMenuUpdateAirplaneOption(2));
+        return subOptions;
+    }
+
+    @Override
+    public void setSubOptions(List<Options> subOptions) {
+
     }
 }
