@@ -3,6 +3,7 @@ package com.kodigo.managmentflights.Menu;
 import com.kodigo.managmentflights.DAL.FlightInMemoryRepositoryImp;
 import com.kodigo.managmentflights.DAL.FlightScheduleInMemoryRepositoryImp;
 import com.kodigo.managmentflights.Entities.*;
+import com.kodigo.managmentflights.helpers.EmailImp;
 import com.kodigo.managmentflights.helpers.IExporterDocument;
 import com.kodigo.managmentflights.helpers.ImporterDocumentImp;
 import org.apache.poi.ss.usermodel.*;
@@ -56,6 +57,7 @@ public class ManageFlights extends Options  {
     }
 
     private void generateFlightsReport() {
+        EmailImp email=new EmailImp();
         IExporterDocument exporterDocument = new ImporterDocumentImp();
         ArrayList<Flight> ongoings= new ArrayList<>();
         ArrayList<Flight> delays= new ArrayList<>();
@@ -107,6 +109,15 @@ public class ManageFlights extends Options  {
             case "3" -> exporterDocument.writeToExcelFile(cancels,"cancels.xls");
             case "4" -> exporterDocument.writeToExcelFile(landeds,"landed.xls");
             case "5" -> exporterDocument.writeToExcelFile(all,"general.xls");
+            case "6" -> System.out.println("Exit");
+        }
+        switch (option) {
+            case "0" ->System.out.println("Wrong Option");
+            case "1" -> email.SendEmail("ongoings.xls");
+            case "2"->  email.SendEmail("delays.xls");
+            case "3" -> email.SendEmail("cancels.xls");
+            case "4" -> email.SendEmail("landed.xls");
+            case "5" -> email.SendEmail("general.xls");
             case "6" -> System.out.println("Exit");
         }
     }
