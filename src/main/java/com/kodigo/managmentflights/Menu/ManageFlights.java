@@ -1,7 +1,7 @@
 package com.kodigo.managmentflights.Menu;
 
-import com.kodigo.managmentflights.ConsoleApp.Program;
 import com.kodigo.managmentflights.DAL.FlightInMemoryRepositoryImp;
+import com.kodigo.managmentflights.DAL.FlightScheduleInMemoryRepositoryImp;
 import com.kodigo.managmentflights.Entities.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 
 public class ManageFlights extends Options {
     FlightInMemoryRepositoryImp flightsrepository = new FlightInMemoryRepositoryImp();
+    FlightScheduleInMemoryRepositoryImp flightschedulerepository = new FlightScheduleInMemoryRepositoryImp();
     // IFlightRepository repository;
 
     public ManageFlights(Integer code) {
@@ -43,10 +44,7 @@ public class ManageFlights extends Options {
         int decision = validateOption(option);
 
         switch (decision) {
-            case 0 -> {
-                System.out.println("Invalid Option, you are going back to the main menu");
-
-            }
+            case 0 -> System.out.println("Invalid Option, you are going back to the main menu");
             case 1 -> submenuInsert();
             case 2 -> updateFlight();
             case 3 -> generateFlightsReport();
@@ -59,6 +57,70 @@ public class ManageFlights extends Options {
     }
 
     private void updateFlight() {
+        var flightlist = flightsrepository.findAll();
+        for (Flight flight:flightlist){
+            System.out.println(flight);
+        }
+        int contador=0;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("UPDATE");
+        System.out.print("Enter Id Flight to UPDATE: ");
+        String id1 = sc.next();
+        StringBuilder options=new StringBuilder();
+        Flight fi = flightsrepository.getFlightById(id1);
+        List<FlightSchedule> schedules = fi.getSchedules();
+        for (FlightSchedule schedule:schedules){
+            System.out.println(contador+ " " + schedule);
+        }
+        Scanner fss = new Scanner(System.in);
+        System.out.print("Insert the Schedule to update: ");
+        String fs1 = fss.next();
+        int i=0;
+
+        options.append("Enter Status to update to UPDATE: ")
+                .append("\n 1.On going")
+                .append("\n 2.Delay")
+                .append("\n 3.Cancelled")
+                .append("\n 4.Landed \n");
+        System.out.println(options);
+        String s = sc.next();
+
+        switch (s){
+            case "1":
+                for (FlightSchedule ongoing:schedules) {
+                    if (i == Integer.parseInt(fs1)) {
+                        ongoing.setStatus(Status.OnGoing);
+                    }
+                }
+                break;
+            case "2":
+                for (FlightSchedule delay:schedules) {
+                    if (i == Integer.parseInt(fs1)) {
+                        delay.setStatus(Status.Delay);
+                    }
+                }
+                break;
+            case "3":
+                for (FlightSchedule delay:schedules) {
+                    if (i == Integer.parseInt(fs1)) {
+                        delay.setStatus(Status.canceled);
+                        System.out.print("Insert the Reason why is cancelled: ");
+                        String r = sc.next();
+                    }
+                }
+                break;
+            case "4":
+                for (FlightSchedule delay:schedules) {
+                    if (i == Integer.parseInt(fs1)) {
+                        delay.setStatus(Status.Landed);
+                    }
+                }
+
+        }
+
+
+
+
     }
 
     private int validateOption(String option) {
@@ -81,13 +143,8 @@ public class ManageFlights extends Options {
         System.out.println("Enter one of the above options");
         String option = f.nextLine();
         switch (option) {
-            case "1":
-                insertFlight();
-                break;
-            case "2":
-                insertFlights();
-                break;
-
+            case "1" -> insertFlight();
+            case "2" -> insertFlights();
         }
     }
 
@@ -193,22 +250,19 @@ public class ManageFlights extends Options {
     public String getTheFlightNumber() {
         Scanner f = new Scanner(System.in);
         System.out.println("Enter the number of the flight");
-        String txt = f.nextLine();
-        return txt;
+        return f.nextLine();
     }
 
     public String getTheAirpline() {
         Scanner f = new Scanner(System.in);
         System.out.println("Enter airline of the flight");
-        String txt = f.nextLine();
-        return txt;
+        return f.nextLine();
     }
 
     public String getTheModel() {
         Scanner f = new Scanner(System.in);
         System.out.println("Enter the model of the airplane of the flight");
-        String txt = f.nextLine();
-        return txt;
+        return f.nextLine();
     }
 
     public String getTheCountry(int decision) {
@@ -218,8 +272,7 @@ public class ManageFlights extends Options {
         } else {
             System.out.println("Enter the departure country");
         }
-        String txt = f.nextLine();
-        return txt;
+        return f.nextLine();
     }
 
     public String getTheCity(int decision) {
@@ -230,8 +283,7 @@ public class ManageFlights extends Options {
         } else {
             System.out.println("Enter the departure city");
         }
-        String txt = f.nextLine();
-        return txt;
+        return f.nextLine();
     }
 
     public Date AskForDate(int decition) throws ParseException {
@@ -245,8 +297,7 @@ public class ManageFlights extends Options {
         }
         String txt = f.nextLine();
         String d = validate(txt);
-        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(d);
-        return date;
+        return new SimpleDateFormat("dd/MM/yyyy").parse(d);
     }
 
     private String validate(String txt) throws ParseException {

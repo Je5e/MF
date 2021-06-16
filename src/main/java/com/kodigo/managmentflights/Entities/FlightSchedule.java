@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import java.util.Date;
 @AllArgsConstructor@NoArgsConstructor@Setter@Getter
-public class FlightSchedule {
+public class FlightSchedule extends Entity {
     private Date dateDaparture;
     private Date dateArrival;
     private Date RealDeparture;
@@ -20,7 +20,9 @@ public class FlightSchedule {
     }
     public String toString() {
         StringBuilder string =new StringBuilder();
-        string.append(" Departure Date: ")
+        string.append(" Status: ")
+                .append(this.status)
+                .append(" Departure Date: ")
                 .append(this.dateDaparture)
                 .append(" Arrival Date: ")
                 .append(dateArrival)

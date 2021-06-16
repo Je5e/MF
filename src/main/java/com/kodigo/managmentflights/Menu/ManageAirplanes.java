@@ -10,7 +10,7 @@ public class ManageAirplanes extends  Options{
 
     public ManageAirplanes(Integer code) {
         this.code = code;
-        this.description = "Manage Flights.";
+        this.description = "Manage Airplanes.";
     }
     public void executeAction() {
         System.out.println("This is the action of the Manage Airplane Menu");

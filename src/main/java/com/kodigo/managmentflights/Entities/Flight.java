@@ -21,23 +21,21 @@ public class Flight extends Entity {
     }
 
     public String toString() {
-     StringBuilder string =new StringBuilder();
-     string.append("-----------------------------------------------------------\n")
-             .append(" idFlight: ")
-             .append(this.getId())
-             .append("\n Flight number: ")
-             .append(flightNumber)
-             .append("\n Airplane: ")
-             .append(airplane)
-             .append("\n departure from: ")
-             .append(departure)
-             .append("\n arrival: ")
-             .append(arrival)
-             .append("\n Schedules: ")
-             .append(schedules)
-             .append("\n-----------------------------------------------------------\n");
 
-     return string.toString();
+        return "-----------------------------------------------------------\n" +
+                " idFlight: " +
+                this.getId() +
+                "\n Flight number: " +
+                flightNumber +
+                "\n Airplane: " +
+                airplane +
+                "\n departure from: " +
+                departure +
+                "\n arrival: " +
+                arrival +
+                "\n Schedules: " +
+                schedules +
+                "\n-----------------------------------------------------------\n";
     }
 
 
