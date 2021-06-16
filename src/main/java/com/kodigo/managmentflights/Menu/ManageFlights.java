@@ -101,11 +101,14 @@ public class ManageFlights extends Options {
                 }
                 break;
             case "3":
-                for (FlightSchedule delay:schedules) {
+                for (FlightSchedule cancel:schedules) {
                     if (i == Integer.parseInt(fs1)) {
-                        delay.setStatus(Status.canceled);
+                        Scanner ca = new Scanner(System.in);
+                        cancel.setStatus(Status.canceled);
                         System.out.print("Insert the Reason why is cancelled: ");
-                        String r = sc.next();
+                        String r = ca.next();
+                        cancel.setComment(r);
+
                     }
                 }
                 break;
