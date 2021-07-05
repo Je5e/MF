@@ -4,7 +4,7 @@ import com.kodigo.managmentflights.DAL.Interfaces.IAirplaneInMemoryRepository;
 import com.kodigo.managmentflights.Entities.Airplane;
 
 public class AirplaneInMemoryRepositoryImp extends InMemoryRepositoryImp<Airplane>
-        implements IAirplaneInMemoryRepository<Airplane> {
+        implements IAirplaneInMemoryRepository {
 
     public AirplaneInMemoryRepositoryImp() {
         Airplane A1 = new Airplane();

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Program {
-    public static IAirplaneInMemoryRepository<Airplane> repositoryAirplane =
+    public static IAirplaneInMemoryRepository repositoryAirplane =
             new AirplaneInMemoryRepositoryImp();
     static boolean salir = false;
 

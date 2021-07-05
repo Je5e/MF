@@ -1,5 +1,6 @@
 package com.kodigo.managmentflights.ConsoleApp;
 
+import com.kodigo.managmentflights.BL.Calculator;
 import com.kodigo.managmentflights.DAL.FlightInMemoryRepositoryImp;
 import com.kodigo.managmentflights.DAL.Interfaces.IFlightInMemoryRepository;
 import com.kodigo.managmentflights.Entities.Flight;
@@ -12,8 +13,9 @@ public class ReportsApp {
     public static void main(String[] args) {
         // Programamos para una Interfaz y no para una implementacion Inversion of Control
         // principol.
-
-        IFlightInMemoryRepository<Flight> repo = new FlightInMemoryRepositoryImp();
+       Calculator calculator= ()-> System.out.println("From Calculator.calculate()");
+       calculator.calculate();
+       // IFlightInMemoryRepository<Flight> repo = new FlightInMemoryRepositoryImp();
 
        // var flights = repo.findAll().stream().toList();
         String id = "";
@@ -23,6 +25,7 @@ public class ReportsApp {
             id = f.getId();
             break;
         }*/
+        /*
         var flights = repo.getFlightsByDate(new Date("06/15/2021"));
         repo .AddFlightsArrayList(flights);
          // Get Flight By Id. Report.
@@ -31,5 +34,7 @@ public class ReportsApp {
         //List<Flight> data = new ArrayList<>();
         //data.add(flight);
         //exporterDocument.writeToExcelFile(flights, "report.xls");
+
+         */
     }
 }

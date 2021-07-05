@@ -21,8 +21,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ManageFlights extends Options  {
-   static IFlightInMemoryRepository<Flight> flightsrepository =
-           new FlightInMemoryRepositoryImp();
+   static IFlightInMemoryRepository flightsrepository =
+           new FlightInMemoryRepositoryImp(); // Esta se las quiera injectar.
     WeatherForecast apiWeather=new WeatherForecast(new APIWeatherImp());
     // IFlightRepository repository;
 

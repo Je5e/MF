@@ -1,10 +1,11 @@
 package com.kodigo.managmentflights.DAL;
 
 import com.kodigo.managmentflights.DAL.Interfaces.IFlighScheduleInMemoryRepository;
-import com.kodigo.managmentflights.Entities.FlightSchedule ;
+import com.kodigo.managmentflights.Entities.FlightSchedule;
 
-public class FlightScheduleInMemoryRepositoryImp  extends InMemoryRepositoryImp<FlightSchedule>
-        implements IFlighScheduleInMemoryRepository<FlightSchedule> {
+public class FlightScheduleInMemoryRepositoryImp extends InMemoryRepositoryImp<FlightSchedule>
+        implements IFlighScheduleInMemoryRepository {
+
     public FlightSchedule findFlightScheduleById(String id) {
         FlightSchedule result = null;
         for (FlightSchedule a : entities) {

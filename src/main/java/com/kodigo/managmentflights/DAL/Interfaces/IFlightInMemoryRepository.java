@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public interface IFlightInMemoryRepository<T extends Entity> extends IRepository<T> {
+public interface IFlightInMemoryRepository extends IRepository<Flight> {
 
      List<Flight> getFlightsByDate(Date date);
      Flight getFlightById(String id);

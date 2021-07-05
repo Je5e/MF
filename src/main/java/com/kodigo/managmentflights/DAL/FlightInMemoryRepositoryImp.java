@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 public class FlightInMemoryRepositoryImp extends InMemoryRepositoryImp<Flight>
-        implements IFlightInMemoryRepository<Flight> {
+        implements IFlightInMemoryRepository {
 
     public FlightInMemoryRepositoryImp() {
         // Flight
