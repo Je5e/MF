@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.Date;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
@@ -18,10 +20,25 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
          IFlightInMemoryRepository underTest= new FlightInMemoryRepositoryImp();
         Flight flight = new Flight();
         flight.setFlightNumber("8754a");
+
         // when
         underTest.create(flight);
+
         // then
-        var flights = underTest.findAll();
-       assertThat(flights.stream().count()).isEqualTo(4);
+        var actual = underTest.findAll().size();
+        int expected = 4;
+       assertThat(actual).isEqualTo(expected);
+    }
+    @Test
+     void itShouldCheckIfCanGetAFlightByDate(){
+        // given
+        IFlightInMemoryRepository underTest= new FlightInMemoryRepositoryImp();
+
+        // when
+       var actual= underTest.getFlightsByDate(new Date("6/20/2021")).size();
+
+        // then
+       int expected =1;
+        assertThat(actual).isEqualTo(expected);
     }
 }
